@@ -1,0 +1,50 @@
+Find users with rating greater than 4
+db.user.find(
+	{
+		"rating" : { $gt : 4}
+	},
+	{
+		"firstname":1,
+		"lastname":1,
+		rating":1
+	}
+  ).pretty();
+	
+	
+update user rating for a trip provided by the driver
+db.user.update({ "_id":1, "ridesTaken.tripId" : 100 }, { $set : { "ridesTaken.$.riderRating" : 2.5 }});
+
+//calculate total rating of user
+db.user.aggregate( [
+   { $match: { _id: 1 } },
+   {
+     $set: {
+        rating: { $avg: "$ridesTaken.riderRating" }
+     }
+   },
+      {
+		$project: 
+		{
+			"firstname":1,
+			"lastname":1,
+			"rating":1
+		}
+	  }
+]).pretty();
+
+Find and verify record
+db.user.find({ "_id":1, "ridesTaken.tripId" : 100 } , { "firstname":1,"lastname":1, "ridesTaken.tripId":1, "ridesTaken.riderRating":1}).pretty();
+
+db.user.update({ "_id":1 },{
+	$set: { currentGeoLocation : { type: "Point", coordinates: [ -73.88, 43.78 ] } }
+ });
+ 
+ 
+Delete a Saved Address by addr1
+db.user.update({"_id":1}, { $pull: { "savedAddress" : { "addr1": /6209/ } }} );
+
+db.user.find({ "_id":1 } , { "firstname":1,"lastname":1, "savedAddress" :1}).pretty();
+
+
+
+
