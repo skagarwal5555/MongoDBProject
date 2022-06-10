@@ -19,8 +19,7 @@ db.drivers.aggregate(
       {
 		$project: 
 		{
-			"firstname":1,
-			"lastname":1,
+			"name":1,
 			"vehicles.category":1
 		}
 	  }
@@ -43,8 +42,7 @@ db.drivers.aggregate(
       {
 		$project: 
 		{
-			"firstname":1,
-			"lastname":1,
+			"name":1,
 			"vehicles.category":1
 		}
 	  }
@@ -57,7 +55,7 @@ db.drivers.aggregate(
 	{
 	  $project: 
 	  {
-		  "firstname":1,"lastname":1,"rating":1, "trips.tripId":1, "trips.driverRating":1
+		  "name":1,"rating":1, "trips.tripId":1, "trips.driverRating":1
 	  }
 	}
   ).pretty();
@@ -77,8 +75,7 @@ db.drivers.aggregate( [
       {
 		$project: 
 		{
-			"firstname":1,
-			"lastname":1,
+			"name":1,
 			"rating":1
 		}
 	  }
@@ -88,8 +85,58 @@ db.drivers.aggregate( [
 //Delete a Saved Address
 db.drivers.update({"_id":1}, { $pull: { "savedAddress" : { "zipCode":79108 } }} );
 
-db.drivers.find({ "_id":1 } , { "firstname":1,"lastname":1, "savedAddress" :1}).pretty();
+db.drivers.find({ "_id":1 } , { "name":1, "savedAddress" :1}).pretty();
+
+//Insert a new saved Address 
+db.drivers.update({"_id":1}, { $push: { "savedAddress" : {
+            "addr1":"6565 Lock Avenue",
+            "addr2":"Apt 306",
+            "city":"Amarillo",
+            "state":"Texas",
+            "Country":"USA",
+            "zipCode":79107
+         } }} );
+		 
+db.drivers.find({ "_id":1 } , { "name":1, "savedAddress" :1}).pretty();
+
+//update address for a driver
+db.drivers.update({ "_id":1, "savedAddress.zipCode" : 79107 }, { $set : { "savedAddress.$.addr2" : "Apt 102" }});
 
 
+db.drivers.find({ "_id":1 } , { "name":1, "savedAddress" :1}).pretty();
+
+
+db.drivers.find({ "_id":1 } , { "name":1, "defaultAddress" :1}).pretty();
+
+//update default address
+db.drivers.update({"_id":1}, { $set: { "defaultAddress" : {
+            "addr1":"6565 Lock Avenue",
+            "addr2":"Apt 306",
+            "city":"Amarillo",
+            "state":"Texas",
+            "Country":"USA",
+            "zipCode":79107
+         } } });
+		 
+db.drivers.find({ "_id":1 } , { "name":1, "defaultAddress" :1}).pretty();
+
+db.drivers.find({ "_id":2 } , { "name":1, "vehicles" :1}).pretty();
+
+//Delete a vehicles
+db.drivers.update({"_id":2}, { $pull: { "vehicles" : { "licensePlateNumber":"KLL5060" } }} );
+		 
+
+//Insert a new  vehicles 
+db.drivers.update({"_id":2}, { $push: { "vehicles" : {
+             "licensePlateNumber":"KLL5061",
+            "color":"Black",
+            "category":"Luxury",
+            "isActiveUsed":false
+         } }} );	
+
+//update address for a driver
+db.drivers.update({ "_id":2, "vehicles.licensePlateNumber" : "KLL5061" }, { $set : { "vehicles.$.color" : "Jet Black" }});
+
+		 
 
 

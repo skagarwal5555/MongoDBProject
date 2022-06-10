@@ -1,8 +1,10 @@
 db.user.insert([
    {
       "_id":1,
-      "firstname":"Sourav",
-      "lastname":"agarwal",
+      "name": {
+				"firstname":"Sourav",
+				"lastname":"Agarwal"
+			},
       "email":"skagarwal5555@gmail.com",
       "phoneNumber":8066749643,
       "rating":4.5,
@@ -100,8 +102,10 @@ db.user.insert([
    },
    {
       "_id":2,
-      "firstname":"Manish",
-      "lastname":"Baja",
+      "name": {
+				"firstname":"Manish",
+				"lastname":"Bajaj"
+			},
       "email":"ManishBajaj1989@gmail.com",
       "phoneNumber":9733228298,
       "rating":4.5,

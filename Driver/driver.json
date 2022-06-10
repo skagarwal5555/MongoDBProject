@@ -1,8 +1,10 @@
 db.drivers.insert([
    {
       "_id":1,
-      "firstname":"Raju",
-      "lastname":"Biswas",
+	  "name": {
+				"firstname":"Raju",
+				"lastname":"Biswas"
+			},
       "email":"rajuBiswas4956@gmail.com",
       "phoneNumber":8066749643,
       "rating":4.5,
@@ -120,8 +122,10 @@ db.drivers.insert([
    },
    {
       "_id":2,
-      "firstname":"Hemant",
-      "lastname":"Guha",
+       "name": {
+				"firstname":"Hemant ",
+				"lastname":"Guha"
+			},
       "email":"hguha12344@gmail.com",
       "phoneNumber":8523697412,
       "rating":4.5,
@@ -236,8 +240,10 @@ db.drivers.insert([
 
 db.drivers.insert({
       "_id":3,
-      "firstname":"Md",
-      "lastname":"Ahmed",
+      "name": {
+				"firstname":"Md",
+				"lastname":"Ahmed"
+			},
       "email":"MdAhemd@gmail.com",
       "phoneNumber":5847961232,
       "rating":4.5,
