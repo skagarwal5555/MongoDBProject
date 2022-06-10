@@ -234,11 +234,8 @@ db.drivers.insert([
             "status":"Completed"
          }
       ]
-   }
-]);
-
-
-db.drivers.insert({
+   },
+   {
       "_id":3,
       "name": {
 				"firstname":"Md",
@@ -298,4 +295,4 @@ db.drivers.insert({
             "isActiveUsed":true
          }
       ]
-   });
+   }]);
